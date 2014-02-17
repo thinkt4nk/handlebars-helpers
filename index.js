@@ -2,6 +2,49 @@ Handlebars = require('handlebars');
 
 exports.registerHelpers = function() {
 
+    Handlebars.registerHelper('equals',function(a, b, options) {
+        return (a == b)
+            ? options.fn(this)
+            : options.inverse(this)
+            ;
+    });
+    Handlebars.registerHelper('notEquals',function(a,b, options) {
+        return (a != b)
+            ? options.fn(this)
+            : options.inverse(this)
+            ;
+    });
+    Handlebars.registerHelper('inArray',function(a,b, options) {
+        return (!!~b.indexOf(a))
+            ? options.fn(this)
+            : options.inverse(this)
+            ;
+    });
+    Handlebars.registerHelper('notInArray',function(a,b, options) {
+        return (!~b.indexOf(a))
+            ? options.fn(this)
+            : options.inverse(this)
+            ;
+    });
+    Handlebars.registerHelper('isEmpty',function(a, options) {
+        return (a == null || a.length < 1)
+            ? options.fn(this)
+            : options.inverse(this)
+            ;
+    });
+    Handlebars.registerHelper('notIsEmpty',function(a, options) {
+        if (typeof(a) == 'string'){
+            return (a != null && a.length > 0)
+                ? options.fn(this)
+                : options.inverse(this)
+                ;
+        } else {
+            return (a != null)
+                ? options.fn(this)
+                : options.inverse(this)
+                ;
+        }
+    });
     // Escape HTML
     Handlebars.registerHelper('htmlEscape', function(text) {
         return new Handlebars.SafeString(text);
