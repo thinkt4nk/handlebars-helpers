@@ -1,9 +1,9 @@
-(function (module, factory) {
+(function (global, factory) {
     // node
     if (typeof module === 'object' && module.exports)
         return module.exports = factory(require('Handlebars'));
     // browser
-    module.HandlebarsHelpers = factory(module.Handlebars);
+    global.HandlebarsHelpers = factory(module.Handlebars);
 }(this, function(Handlebars) {
     return {
         registerHelpers: function() {
